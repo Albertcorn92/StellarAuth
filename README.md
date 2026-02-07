@@ -16,3 +16,8 @@ Achieved 100% pass rates on formal GTest suite:
 
 ## About the Author
 Developed by **Albert Cornelius **, Engineering student at Embry-Riddle Aeronautical University.
+
+## Verification & Testing
+StellarAuth v2.2 has been formally verified using the F´ GTest suite, achieving 100% pass rates across all radiation-hardening (TMR) and security modules.
+
+![Unit Test Results](StellarAuth_Verification.png)
