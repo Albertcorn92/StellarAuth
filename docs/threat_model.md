@@ -1,26 +1,16 @@
-StellarAuth Security & Threat Analysis
-Target Environment: Space-grade systems
+# StellarAuth Security & Threat Analysis
 
-1. Physical Layer: Solar Occultation Interlock
+## 1. Temporal Layer: Replay Attacks
+* **Threat:** An attacker records a valid "Shadow Signal" from a previous mission and replays it to the sensor bus to unlock the system later.
+* **Mitigation:** **Replay Resistance Logic.** The component tracks `m_last_auth_window_start`. Once a window is used, it is "burned." Any subsequent 
+signal in that same window is mathematically rejected.
 
-Threat: Remote command injection or unauthorized "ghost" signals.
+## 2. Spatial Layer: Signal Spoofing
+* **Threat:** A hacker shines a laser or casts a shadow at the sensor at the wrong time (e.g., creating a fake occultation).
+* **Mitigation:** **Ephemeris Gating.** The system enforces a strict Time-Window and Heading check. Signals received outside the uploaded 
+`UPDATE_EPHEMERIS` parameters are ignored (treated as debris).
 
-Mitigation: Requires a physical "Solar Ingress" event (detected via light 
-sensor derivative) to unlock the auth window, ensuring the satellite is in 
-a specific orbital position before accepting high-privilege commands.
-
-2. Environmental Layer: Radiation/SEU Resistance
-
-Threat: Bit-flips causing unauthorized state changes (e.g., moving from 
-"Locked" to "Authenticated" without a signal).
-
-Mitigation: TMR logic (as described in architecture.md) ensures no single 
-bit-flip can bypass the authentication gate.
-
-3. Kinetic Layer: Stability Monitor
-
-Threat: Authorization during uncontrolled vehicle tumbling or loss of 
-attitude control.
-
-Mitigation: Integration with IMU telemetry; the system automatically 
-denies authentication if rotation exceeds 5° per cycle.
+## 3. Environmental Layer: Radiation/SEU
+* **Threat:** High-energy particles flip a bit in memory, changing `is_locked = true` to `false`.
+* **Mitigation:** **TMR Voting.** The state is stored in triplicate. A single bit-flip is mathematically overruled by the other two registers and 
+self-healed in the next clock cycle.

@@ -1,0 +1,49 @@
+ninja: no work to do.
+ninja: no work to do.
+ninja: no work to do.
+Internal ctest changing into directory: /Users/albertcornelius/Aerospace_FSW/SolarAuth_v2/build-fprime-automatic-native-ut
+UpdateCTestConfiguration  from :/Users/albertcornelius/Aerospace_FSW/SolarAuth_v2/build-fprime-automatic-native-ut/DartConfiguration.tcl
+Parse Config file:/Users/albertcornelius/Aerospace_FSW/SolarAuth_v2/build-fprime-automatic-native-ut/DartConfiguration.tcl
+UpdateCTestConfiguration  from :/Users/albertcornelius/Aerospace_FSW/SolarAuth_v2/build-fprime-automatic-native-ut/DartConfiguration.tcl
+Parse Config file:/Users/albertcornelius/Aerospace_FSW/SolarAuth_v2/build-fprime-automatic-native-ut/DartConfiguration.tcl
+Test project /Users/albertcornelius/Aerospace_FSW/SolarAuth_v2/build-fprime-automatic-native-ut
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 1
+    Start 1: StellarAuth_ut_exe
+
+1: Test command: /Users/albertcornelius/Aerospace_FSW/SolarAuth_v2/build-fprime-automatic-native-ut/bin/Darwin/StellarAuth_ut_exe
+1: Working Directory: /Users/albertcornelius/Aerospace_FSW/SolarAuth_v2/StellarAuth
+1: Test timeout computed to be: 1500
+1: [==========] Running 6 tests from 1 test suite.
+1: [----------] Global test environment set-up.
+1: [----------] 6 tests from StellarAuthFinal
+1: [ RUN      ] StellarAuthFinal.MissionSuccess
+1: [       OK ] StellarAuthFinal.MissionSuccess (2 ms)
+1: [ RUN      ] StellarAuthFinal.TimingViolation
+1: [       OK ] StellarAuthFinal.TimingViolation (0 ms)
+1: [ RUN      ] StellarAuthFinal.YawWraparound
+1: [       OK ] StellarAuthFinal.YawWraparound (0 ms)
+1: [ RUN      ] StellarAuthFinal.ReplayResistance
+1: [       OK ] StellarAuthFinal.ReplayResistance (0 ms)
+1: [ RUN      ] StellarAuthFinal.StuckSensorFault
+1: [       OK ] StellarAuthFinal.StuckSensorFault (0 ms)
+1: [ RUN      ] StellarAuthFinal.RadiationResilience
+1: [       OK ] StellarAuthFinal.RadiationResilience (0 ms)
+1: [----------] 6 tests from StellarAuthFinal (5 ms total)
+1: 
+1: [----------] Global test environment tear-down
+1: [==========] 6 tests from 1 test suite ran. (5 ms total)
+1: [  PASSED  ] 6 tests.
+1/1 Test #1: StellarAuth_ut_exe ...............   Passed    0.20 sec
+
+The following tests passed:
+	StellarAuth_ut_exe
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.46 sec
