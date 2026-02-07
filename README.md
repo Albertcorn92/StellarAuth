@@ -1,3 +1,4 @@
+![Verification Status](https://github.com/Albertcorn92/StellarAuth/actions/workflows/verify.yml/badge.svg)
 # StellarAuth v2.2: Occultation-Based Physical Authentication
 
 ## Overview
