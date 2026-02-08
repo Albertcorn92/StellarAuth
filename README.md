@@ -21,6 +21,22 @@ Achieved 100% pass rates on the formal GTest suite (6/6 Scenarios):
 5. **Stuck Sensor:** Detection of hardware failure without false alarms.
 6. **Radiation Resilience:** Confirmed TMR self-healing during memory corruption.
 
+## 🛰️ Hardware-in-the-Loop (HiL) Verification
+The StellarAuth v4.1 Flight Software was validated on **ESP32-S3 silicon** to prove fault tolerance in a physical environment.
+
+* **Target:** ESP32-S3 Dev Module (Xtensa LX7)
+* **Test Suite:** v4.1-PLATINUM (Stress Testing)
+* **Results:** [View Full HiL Logs](docs/verification_ESP32_HiL.txt)
+
+| ID | Test Case | Outcome | Engineering Note |
+| :--- | :--- | :--- | :--- |
+| **TC-01** | Nominal Mission Profile | ✅ **PASS** | Full FSM transition from `LOCKED` to `Key Burn` verified. |
+| **TC-02** | Replay Attack Injection | ✅ **PASS** | System correctly rejected reuse of Window ID `1000`. |
+| **TC-03** | Single-Event Upset (SEU) | ✅ **PASS** | TMR Scrubbing repaired Register B in <1ms. |
+| **TC-04** | Yaw Boundary Precision | ✅ **PASS** | Rejected arming at 5.1° deviation (Limit: 5.0°). |
+| **TC-05** | Sensor Noise Rejection | ✅ **PASS** | 5/5 false positives aborted due to signal bounce. |
+| **TC-06** | Double-Bit Upset | ✅ **PASS** | **Safe Mode Triggered.** Multi-bit failure correctly identified. |
+
 ## About the Developer
 **Albert Cornelius** is an Engineering student at Embry-Riddle Aeronautical University and an aspiring Flight Software Engineer. His research focuses on **Resilient Space Systems**, **Cyber-Physical Security**, and **Fault-Tolerant Avionics**.
 
