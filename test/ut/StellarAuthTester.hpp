@@ -10,36 +10,27 @@ namespace SolarAuth {
   class StellarAuthTester : public StellarAuthGTestBase {
 
     public:
-      static const I32 MAX_HISTORY_SIZE = 100;
+      // INCREASED SIZE TO PREVENT OVERFLOW IN LONG TESTS
+      static const I32 MAX_HISTORY_SIZE = 1000;
 
       StellarAuthTester();
       ~StellarAuthTester();
 
-      // --- THE "FINAL 5" FLIGHT READINESS TESTS ---
-      
-      // 1. Spatio-Temporal Lock
-      void testMissionSuccess();         // Happy Path: Right Time + Right Star
-      void testTimingViolation();        // Shadow at Wrong Time -> LOCKED
-      
-      // 2. Spatial Math
-      void testYawWraparound();          // Shadow at 359 deg -> UNLOCKED (Math Fix)
-      
-      // 3. Replay Resistance
-      void testReplayAttack();           // Reuse same valid shadow -> BLOCKED
-      
-      // 4. Context-Aware Faults
-      void testStuckSensorCruise();      // Stuck at 0 while LOCKED -> NO FAULT
-      void testStuckSensorActive();      // Stuck at 0 while ARMED -> FAULTED
-      
-      // 5. Reliability
-      void testTMRRepair();              // Bit flip -> Self-Healed
+      // --- TEST SCENARIOS ---
+      void testMissionSuccess();         
+      void testTimingViolation();        
+      void testYawWraparound();          
+      void testReplayAttack();           
+      void testStuckSensorActive();      
+      void testTMRRepair();              
+      void testEmergencyBypass();        
 
     private:
       StellarAuth component;
       void dispatchAll();
-      
-      // Helper to simulate "Time Passing"
       void stepCycles(U32 cycles);
+      void setInputs(F32 lightLevel, F32 yaw, U32 timeSec);
+      void setupParameters(U32 start, U32 end, F32 yaw);
   };
 }
 #endif

@@ -2,7 +2,7 @@
 #define SOLARAUTH_STELLARAUTH_HPP
 
 #include "StellarAuth/StellarAuthComponentAc.hpp"
-#include <cmath> // For std::abs and std::fmod
+#include <cmath> 
 
 namespace SolarAuth {
 
@@ -15,7 +15,7 @@ namespace SolarAuth {
     private:
       friend class StellarAuthTester;
 
-      // --- NEW: FINITE STATE MACHINE ---
+      // --- FINITE STATE MACHINE ---
       enum AuthState {
           STATE_LOCKED = 0,
           STATE_ARMED,        // Inside Time Window
@@ -24,46 +24,56 @@ namespace SolarAuth {
           STATE_FAULTED       // Sensor Failure
       };
 
+      // --- SECURITY KEYS ---
+      // Emergency Bypass Key (Break Glass in Case of Fire)
+      static const U32 EMERGENCY_KEY = 0x98765432;
+
       // --- COMPONENT VARIABLES ---
-      U32 m_heading; 
-      U32 m_prevHeading;
+      F32 m_heading; 
       U32 m_heartbeatCounter;
       U32 m_scrubCount;
-      U32 m_persistenceCounter;
       bool m_isStable;
 
       // --- PASSIVE SHADOW LOGIC ---
       F32 m_currentLightLevel;
       F32 m_prevLightLevel;
-      F32 m_last_light_value; // For stuck sensor check
+      F32 m_last_light_value; 
       U32 m_stuck_sensor_counter;
 
       static constexpr F32 INGRESS_THRESHOLD = -40.0f; 
       static constexpr F32 STABILITY_THRESHOLD = 5.0f;
+      static constexpr F32 LIGHT_NOISE_FLOOR = 1.0f; // Lux
 
-      // --- MISSION PLAN (Configurable) ---
+      // --- MISSION PARAMETERS (Shadow Copies) ---
       U32 m_target_window_start;
       U32 m_target_window_end;
       F32 m_target_yaw;
-      U32 m_mission_cycle;
+      
       U32 m_last_auth_window_start; // Replay Resistance
 
       // --- INTERNAL STATE ---
       AuthState m_current_state;
 
-      // --- TMR BLOCK ---
-      static const U32 TMR_STATE_LOCKED   = 0xDEADBEEF;
-      static const U32 TMR_STATE_UNLOCKED = 0xCAFEBABE;
-      static const U32 AUTH_THRESHOLD = 3;
-
+      // --- TMR BLOCK (Triple Modular Redundancy) ---
+      // Storing RAW Enum values (0-4), not magic hex, to prevent cast errors.
       U32 m_state_A;
       U32 m_state_B;
       U32 m_state_C;
+      
+      // TMR for the Persistence Counter (The "Key")
+      U32 m_persistence_A;
+      U32 m_persistence_B;
+      U32 m_persistence_C;
+
+      static const U32 AUTH_THRESHOLD = 3;
 
       // --- HELPER METHODS ---
-      U32 doVote(); 
+      U32 doVoteState() const; 
+      U32 doVotePersistence() const;
       void scrubMemory(); 
-      void updateState(U32 newState);
+      void updateState(AuthState newState);
+      void updatePersistence(U32 newVal);
+      void loadParameters();
 
       // --- HANDLERS ---
       void schedIn_handler(const FwIndexType portNum, U32 context);
@@ -71,8 +81,8 @@ namespace SolarAuth {
       void AUTH_RESET_cmdHandler(const FwOpcodeType opCode, const U32 cmdSeq);
       void LOAD_TRANSIT_SCHEDULE_cmdHandler(const FwOpcodeType opCode, const U32 cmdSeq, U32 starID, U32 seconds, U32 microseconds);
       
-      // [NEW]
-      void UPDATE_EPHEMERIS_cmdHandler(const FwOpcodeType opCode, const U32 cmdSeq, U32 window_start, U32 window_end, F32 target_yaw);
+      // Port Handler for GNC Attitude
+      void navAttitudeIn_handler(const FwIndexType portNum, F32 yaw);
   };
 }
 #endif

@@ -1,6 +1,6 @@
 #include "StellarAuthTester.hpp"
+#include <Fw/Test/UnitTest.hpp>
 
-// GROUP 1: MISSION LOGIC
 TEST(StellarAuthFinal, MissionSuccess) {
     SolarAuth::StellarAuthTester tester;
     tester.testMissionSuccess();
@@ -11,7 +11,6 @@ TEST(StellarAuthFinal, TimingViolation) {
     tester.testTimingViolation();
 }
 
-// GROUP 2: ADVANCED MATH & SECURITY
 TEST(StellarAuthFinal, YawWraparound) {
     SolarAuth::StellarAuthTester tester;
     tester.testYawWraparound();
@@ -22,18 +21,22 @@ TEST(StellarAuthFinal, ReplayResistance) {
     tester.testReplayAttack();
 }
 
-// GROUP 3: RELIABILITY & FAULTS
+TEST(StellarAuthFinal, EmergencyBypass) {
+    SolarAuth::StellarAuthTester tester;
+    tester.testEmergencyBypass();
+}
+
+TEST(StellarAuthFinal, TMRRepair) {
+    SolarAuth::StellarAuthTester tester;
+    tester.testTMRRepair();
+}
+
 TEST(StellarAuthFinal, StuckSensorFault) {
     SolarAuth::StellarAuthTester tester;
     tester.testStuckSensorActive();
 }
 
-TEST(StellarAuthFinal, RadiationResilience) {
-    SolarAuth::StellarAuthTester tester;
-    tester.testTMRRepair();
-}
-
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 }
