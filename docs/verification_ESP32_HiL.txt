@@ -1,0 +1,54 @@
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x1 (POWERON),boot:0x8 (SPI_FAST_FLASH_BOOT)
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2820,len:0x116c
+load:0x403c8700,len:0xc2c
+load:0x403cb700,len:0x3108
+entry 0x403c88b8
+
+
+========================================================
+   STELLARAUTH FLIGHT READINESS VERIFICATION (v4.1)
+========================================================
+
+--- [TEST 1] Nominal Authentication ---
+[T+1000] [INFO] LOCKED -> ARMED | Win:1000 YawDelta:0.0
+[T+1001] [INFO] ARMED -> VERIFYING | Slope:-90.0 Light:10.0
+[T+1004] [INFO] VERIFYING -> AUTHENTICATED | Persistence: 3
+[T+1005] [EVENT] >>> COMMAND AUTHORIZED <<<
+[T+1005] [INFO] Key Burned | WindowID:1000
+RESULT: PASS
+
+--- [TEST 2] Replay Attack Resistance ---
+RESULT: PASS
+
+--- [TEST 3] Single-Bit Upset Recovery ---
+[T+1010] [WARN] SEU REPAIRED | Reg: B
+RESULT: PASS
+
+--- [TEST 4] Yaw Limit Precision (5.1 deg) ---
+RESULT: PASS
+
+--- [TEST 5] Sensor Noise Injection ---
+[T+1000] [INFO] LOCKED -> ARMED | Win:1000 YawDelta:0.0
+[T+1020] [INFO] ARMED -> VERIFYING | Slope:-90.0 Light:10.0
+[T+1021] [WARN] ABORT: Signal Noise | Light:100.00
+[T+1022] [INFO] ARMED -> VERIFYING | Slope:-90.0 Light:10.0
+[T+1023] [WARN] ABORT: Signal Noise | Light:100.00
+[T+1024] [INFO] ARMED -> VERIFYING | Slope:-90.0 Light:10.0
+[T+1025] [WARN] ABORT: Signal Noise | Light:100.00
+[T+1026] [INFO] ARMED -> VERIFYING | Slope:-90.0 Light:10.0
+[T+1027] [WARN] ABORT: Signal Noise | Light:100.00
+[T+1028] [INFO] ARMED -> VERIFYING | Slope:-90.0 Light:10.0
+[T+1029] [WARN] ABORT: Signal Noise | Light:100.00
+RESULT: PASS
+
+--- [TEST 6] Double-Bit Upset (Fail-Safe) ---
+[T+1050] [CRITICAL] TMR FAILURE: Consensus Lost! | Entering SAFE MODE
+RESULT: PASS
+========================================================
+   VERIFICATION COMPLETE. ALL SYSTEMS GREEN.
+========================================================
+
