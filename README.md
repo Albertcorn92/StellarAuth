@@ -1,4 +1,4 @@
-# StellarAuth v1.0-GOLD: Spatio-Temporal Physical Interlock
+# StellarAuth: Spatio-Temporal Physical Interlock
 
 ![Verification Status](https://github.com/Albertcorn92/StellarAuth/actions/workflows/verify.yml/badge.svg)
 
