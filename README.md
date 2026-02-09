@@ -13,13 +13,14 @@ StellarAuth is a mission-critical F´ (F Prime) flight software component design
 * **Context-Aware Fault Detection:** Smart filtering prevents "Stuck Sensor" false positives during long-duration deep space cruise phases.
 
 ## Verified Performance
-Achieved 100% pass rates on the formal GTest suite (6/6 Scenarios):
+Achieved 100% pass rates on the formal GTest suite (7/7 Scenarios):
 1. **Mission Success:** Nominal Spatio-Temporal Lock.
 2. **Timing Violation:** Rejection of shadows outside the Ephemeris window (Debris filtering).
 3. **Spatial Error:** Rejection of shadows from the wrong star vector (Yaw Math verified).
 4. **Replay Attack:** Successful blocking of reused signal data.
 5. **Stuck Sensor:** Detection of hardware failure without false alarms.
 6. **Radiation Resilience:** Confirmed TMR self-healing during memory corruption.
+7. **Emergency Bypass:** Verified "Break Glass" command override for ground control intervention.
 
 ## 🛰️ Hardware-in-the-Loop (HiL) Verification
 The StellarAuth v4.1 Flight Software was validated on **ESP32-S3 silicon** to prove fault tolerance in a physical environment.
