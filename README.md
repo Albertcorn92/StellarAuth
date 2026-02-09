@@ -25,8 +25,8 @@ Achieved 100% pass rates on the formal GTest suite (7/7 Scenarios):
 ## 🛰️ Hardware-in-the-Loop (HiL) Verification
 The StellarAuth v4.1 Flight Software was validated on **ESP32-S3 silicon** to prove fault tolerance in a physical environment.
 
-* **Target:** ESP32-S3 Dev Module (Xtensa LX7)
-* **Test Suite:** v4.1-PLATINUM (Stress Testing)
+* **Target:** ESP32-S3 Dev Module
+* **Test Suite:** v4
 * **[Watch the HiL Verification Video](https://youtu.be/7gWLklOsWnw)**
 * **Results:** [View Full HiL Logs](docs/verification_ESP32_HiL.txt)
 
